@@ -18,16 +18,18 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                Checkout scm
+                checkout scm
             }
         }
-        parallel {
-            agent any
-            stages {
-                stage('Build Vue Project') {
-                    steps {
-                        sh 'cd vue-project'
-                        sh 'docker build -t ${VUE_IMAGE_NAME} .'
+        stage('Build Applications') {
+            parallel {
+                agent any
+                stages {
+                    stage('Build Vue Project') {
+                        steps {
+                            sh 'cd vue-project'
+                            sh 'docker build -t ${VUE_IMAGE_NAME} .'
+                        }
                     }
                 }
             }
