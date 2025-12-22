@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent agent-1
     options {
         timestamps()
         timeout(time: 30, unit: 'MINUTES')
@@ -23,13 +23,12 @@ pipeline {
         }
         stage('Build Applications') {
             parallel {
-                    stage('Build Vue Project') {
-                        steps {
-                            sh 'cd vue-project'
-                            sh 'docker build -t ${VUE_IMAGE_NAME} .'
-                        }
+                stage('Build Vue Project') {
+                    steps {
+                        sh 'cd vue-project'
+                        sh 'docker build -t ${VUE_IMAGE_NAME} .'
                     }
-                
+                }   
             }
         }
     }
