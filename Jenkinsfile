@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     options {
         timestamps()
         timeout(time: 30, unit: 'MINUTES')
@@ -32,8 +32,9 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'cd vue-project && \
-                        docker build -t ${VUE_IMAGE_NAME} .'
+                        dir('vue-project') {
+                            sh 'docker build -t ${VUE_IMAGE_NAME} .'
+                        }
                     }
                 }
                 stage('Build Java Project') {
@@ -43,11 +44,32 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'cd java-project && \
-                        docker build -t ${JAVA_IMAGE_NAME} .'
+                        dir('java-project') {
+                            sh 'docker build -t ${JAVA_IMAGE_NAME} .'
+                        }
                     }
                 }   
             }
+        }
+    }
+    post {
+        always {
+            echo ""
+            echo "===== Build Summary ====="
+            sh '''
+                echo "Branch: ${GIT_BRANCH}"
+                echo "Commit: ${GIT_COMMIT_SHORT}"
+                echo "Build Number: ${BUILD_NUMBER}"
+                echo ""
+                echo "Docker Images:"
+                docker images | grep -E "vue-app|java-app" || echo "No images"
+            '''
+        }
+        success {
+            echo 'Build success'   
+        }
+        failure {
+            echo 'Build failed'   
         }
     }
 }
