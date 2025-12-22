@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+
+# Coverage
+coverage
+
+# Production
+dist
+dist-ssr
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Dependencies
+node_modules
+
+# Docker
+docker-compose.override.yml
+
