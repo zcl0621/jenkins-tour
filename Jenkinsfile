@@ -24,14 +24,14 @@ pipeline {
         stage('Build Applications') {
             parallel {
                 agent any
-                stages {
+
                     stage('Build Vue Project') {
                         steps {
                             sh 'cd vue-project'
                             sh 'docker build -t ${VUE_IMAGE_NAME} .'
                         }
                     }
-                }
+                
             }
         }
     }
