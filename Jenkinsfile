@@ -30,6 +30,7 @@ pipeline {
                 stage('Build Vue Project') {
                     steps {
                         sh 'cd vue-project'
+                        sh 'ls -al'
                         sh 'docker build -t ${VUE_IMAGE_NAME} .'
                     }
                 }   
