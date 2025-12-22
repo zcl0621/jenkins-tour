@@ -23,8 +23,6 @@ pipeline {
         }
         stage('Build Applications') {
             parallel {
-                agent any
-
                     stage('Build Vue Project') {
                         steps {
                             sh 'cd vue-project'
