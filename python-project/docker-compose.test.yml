@@ -22,4 +22,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: ["bash", "-lc", "alembic upgrade head && pytest -q"]
+    command:
+      [
+        "/bin/sh",
+        "-c",
+        "/app/.venv/bin/alembic upgrade head && /app/.venv/bin/pytest -q",
+      ]
