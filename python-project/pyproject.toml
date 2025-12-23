@@ -19,3 +19,8 @@ serve = "python_project.main:run"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["python_project"]
+exclude = ["alembic", "tests"]
