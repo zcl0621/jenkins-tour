@@ -1,0 +1,21 @@
+[project]
+name = "python-project"
+version = "0.1.0"
+description = "HTTP service with Postgres and Alembic migrations."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic",
+    "fastapi",
+    "httpx",
+    "psycopg[binary]",
+    "pytest",
+    "sqlalchemy",
+    "uvicorn[standard]",
+]
+
+[project.scripts]
+serve = "python_project.main:run"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
